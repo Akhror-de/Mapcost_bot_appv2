@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapCost - Локальные предложения</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=07b74146-5f5a-46bf-a2b1-cf6d052a41bb&lang=ru_RU" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>MapCost - Локальные предложения</h1>
+        <div class="filters">
+            <button class="filter-button active" data-category="all">Все</button>
+            <button class="filter-button" data-category="restaurants">Рестораны</button>
+            <button class="filter-button" data-category="beauty">Салоны красоты</button>
+            <button class="filter-button" data-category="auto">Автосервисы</button>
+            <button class="filter-button" data-category="flowers">Цветы</button>
+            <button class="filter-button" data-category="medical">Медцентры</button>
+        </div>
+        <div id="map" class="map"></div>
+        <div class="offers-list"></div>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>

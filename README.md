@@ -1,2 +1,58 @@
-# Mapcost_bot_appv2
-Telegram Mini App for local offers - version 2
+# MapCost - Локальные предложения (Telegram Mini App)
+
+Это Telegram Mini App "MapCost" для агрегации локальных предложений бизнесов, разработанное с полной совместимостью с Vercel.
+
+## Технические требования Vercel:
+- Хостинг: Vercel Serverless Functions + Static Hosting
+- API: Node.js Express с использованием `process.env.PORT`
+- Все пути абсолютны: `https://mapcost-bot-appv2.vercel.app/api/...`
+- CORS: разрешены только домены `vercel.app`
+- Статические файлы: HTML/CSS/JS в корневой директории
+
+## Функционал приложения:
+- Геолокация пользователя через браузер
+- Яндекс.Карта с маркерами предложений вокруг пользователя
+- Фильтрация по категориям: рестораны, салоны красоты, автосервисы, цветы, медцентры
+- Карточки предложений с описанием, адресом, телефоном
+- Кнопка "Перейти в чат с бизнесом" (Telegram Deep Linking)
+
+## Структура проекта:
+- `vercel.json`: Конфигурация для Vercel.
+- `package.json`: Зависимости (Express, CORS, Axios) и скрипты.
+- `api/index.js`: Главный API endpoint (Node.js Express) с функцией проверки ИНН через `api-fns.ru`.
+- `index.html`: Главная страница с подключением Яндекс.Карт.
+- `style.css`: Стилизация приложения в духе Telegram Mini Apps.
+- `app.js`: Клиентская логика (инициализация WebApp, геолокация, карта, фильтрация, API-запросы).
+- `README.md`: Документация проекта.
+
+## Установка и запуск (локально):
+
+1.  **Клонируйте репозиторий:**
+    ```bash
+    git clone <ваш_репозиторий>
+    cd mapcost-bot-appv2
+    ```
+2.  **Установите зависимости:**
+    ```bash
+    npm install
+    ```
+3.  **Запустите сервер разработки:**
+    ```bash
+    npm run dev
+    ```
+    Приложение будет доступно по адресу `http://localhost:3000`.
+
+## Развертывание на Vercel:
+
+1.  Создайте проект на Vercel и подключите ваш репозиторий.
+2.  Убедитесь, что переменная окружения `process.env.PORT` не установлена для Vercel, так как Vercel автоматически управляет портами.
+3.  Убедитесь, что ваш API-ключ Яндекс.Карт указан в `index.html` и `app.js`.
+4.  Vercel автоматически развернет статические файлы и Serverless Function из `api/index.js`.
+
+## Интеграция с API-FNS.RU:
+
+- **API-ключ:** `Ocda37fe74232b4d3fdaf80b13d5fc1f6b98fcd3`
+- **Endpoint:** `https://api-fns.ru/api/egr`
+- **Формат запроса:** `GET https://api-fns.ru/api/egr?req=ИНН&key=API_КЛЮЧ`
+
+Функция проверки ИНН реализована в `api/index.js`.
