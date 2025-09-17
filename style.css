@@ -1,19 +1,104 @@
+/* Общие стили и переменные */
+:root {
+    --tg-main-color: #2481cc; /* Основной цвет Telegram */
+    --tg-white-color: #ffffff;
+    --tg-light-gray-color: #f8f9fa;
+    --tg-text-color: #212121;
+    --tg-secondary-text-color: #757575;
+    --tg-button-color: var(--tg-main-color);
+    --tg-button-text-color: var(--tg-white-color);
+    --tg-bg-color: var(--tg-light-gray-color);
+    --tg-secondary-bg-color: var(--tg-white-color);
+    --tg-border-radius: 12px;
+    --tg-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --tg-transition-duration: 0.3s;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--tg-theme-bg-color, #f4f4f5);
-    color: var(--tg-theme-text-color, #212121);
+    background-color: var(--tg-theme-bg-color, var(--tg-bg-color));
+    color: var(--tg-theme-text-color, var(--tg-text-color));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
     padding: 15px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-h1 {
-    color: var(--tg-theme-text-color, #212121);
-    text-align: center;
+/* Стили для заголовка */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 0;
+    background-color: var(--tg-theme-secondary-bg-color, var(--tg-secondary-bg-color));
+    box-shadow: var(--tg-shadow);
     margin-bottom: 20px;
+    border-bottom-left-radius: var(--tg-border-radius);
+    border-bottom-right-radius: var(--tg-border-radius);
+}
+
+.header .logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    /* Пример логотипа, можно заменить на SVG или изображение */
+    background-color: var(--tg-main-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--tg-white-color);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.header h1 {
+    color: var(--tg-theme-text-color, var(--tg-text-color));
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* Стили для кнопок */
+.button, .filter-button, .contact-button, .floating-chat-button {
+    background-color: var(--tg-theme-button-color, var(--tg-button-color));
+    color: var(--tg-theme-button-text-color, var(--tg-button-text-color));
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--tg-border-radius);
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: var(--tg-shadow);
+    transition: background-color var(--tg-transition-duration) ease, transform var(--tg-transition-duration) ease, box-shadow var(--tg-transition-duration) ease;
+    text-decoration: none; /* Для кнопок-ссылок */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button:hover, .filter-button:hover, .contact-button:hover, .floating-chat-button:hover {
+    background-color: var(--tg-main-color, #1a6cb3); /* Более темный оттенок */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.button:active, .filter-button:active, .contact-button:active, .floating-chat-button:active {
+    transform: translateY(0);
+    box-shadow: var(--tg-shadow);
+}
+
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 .filters {
@@ -25,48 +110,68 @@ h1 {
 }
 
 .filter-button {
-    background-color: var(--tg-theme-button-color, #007bff);
-    color: var(--tg-theme-button-text-color, #ffffff);
-    border: none;
+    flex-grow: 1; /* Чтобы кнопки занимали доступное пространство */
+    min-width: 120px;
     padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
     font-size: 14px;
-    transition: background-color 0.2s ease;
-}
-
-.filter-button:hover {
-    background-color: var(--tg-theme-button-color, #0056b3);
+    box-shadow: none;
+    background-color: var(--tg-theme-secondary-bg-color, var(--tg-secondary-bg-color));
+    color: var(--tg-theme-text-color, var(--tg-text-color));
 }
 
 .filter-button.active {
-    background-color: var(--tg-theme-accent-text-color, #0056b3);
+    background-color: var(--tg-main-color);
+    color: var(--tg-white-color);
+    box-shadow: var(--tg-shadow);
 }
 
+.filter-button:hover:not(.active) {
+    background-color: rgba(var(--tg-main-color), 0.1); /* Слегка подсвечивать */
+    transform: translateY(-1px);
+}
+
+/* Стили для карты */
 .map {
     width: 100%;
     height: 300px;
-    border-radius: 12px;
+    border-radius: var(--tg-border-radius);
     margin-bottom: 20px;
     overflow: hidden;
+    box-shadow: var(--tg-shadow);
+}
+
+/* Стили для карточек предложений */
+.offers-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
 }
 
 .offer-card {
-    background-color: var(--tg-theme-secondary-bg-color, #ffffff);
-    border-radius: 12px;
+    background-color: var(--tg-theme-secondary-bg-color, var(--tg-secondary-bg-color));
+    border-radius: var(--tg-border-radius);
     padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--tg-shadow);
+    transition: transform var(--tg-transition-duration) ease, box-shadow var(--tg-transition-duration) ease;
+    cursor: pointer;
+    animation: fadeIn var(--tg-transition-duration) ease-out forwards;
+    opacity: 0;
+}
+
+.offer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .offer-card h2 {
-    color: var(--tg-theme-text-color, #212121);
+    color: var(--tg-theme-text-color, var(--tg-text-color));
     margin-top: 0;
     margin-bottom: 10px;
+    font-size: 18px;
 }
 
 .offer-card p {
-    color: var(--tg-theme-hint-color, #757575);
+    color: var(--tg-theme-hint-color, var(--tg-secondary-text-color));
     font-size: 14px;
     line-height: 1.5;
     margin-bottom: 5px;
@@ -74,23 +179,184 @@ h1 {
 
 .offer-card .category {
     font-size: 12px;
-    color: var(--tg-theme-link-color, #007bff);
+    color: var(--tg-theme-link-color, var(--tg-main-color));
     margin-bottom: 10px;
+    font-weight: 500;
 }
 
 .offer-card .contact-button {
-    background-color: var(--tg-theme-button-color, #007bff);
-    color: var(--tg-theme-button-text-color, #ffffff);
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
     width: 100%;
-    font-size: 16px;
-    margin-top: 10px;
-    transition: background-color 0.2s ease;
+    margin-top: 15px;
 }
 
-.offer-card .contact-button:hover {
-    background-color: var(--tg-theme-button-color, #0056b3);
+/* Стили для лоадера */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--tg-transition-duration) ease, visibility var(--tg-transition-duration) ease;
+}
+
+.loader-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loader {
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    border-top: 6px solid var(--tg-main-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+/* Стили для плавающей кнопки чата */
+.floating-chat-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 24px;
+    box-shadow: var(--tg-shadow);
+    z-index: 999;
+    background-color: var(--tg-main-color);
+    color: var(--tg-white-color);
+    padding: 0;
+}
+
+.floating-chat-button:hover {
+    background-color: var(--tg-main-color, #1a6cb3);
+}
+
+/* Стили для попапа */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--tg-transition-duration) ease, visibility var(--tg-transition-duration) ease;
+}
+
+.popup-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup-content {
+    background-color: var(--tg-theme-secondary-bg-color, var(--tg-secondary-bg-color));
+    border-radius: var(--tg-border-radius);
+    padding: 25px;
+    max-width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+    box-shadow: var(--tg-shadow);
+    position: relative;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform var(--tg-transition-duration) ease, opacity var(--tg-transition-duration) ease;
+}
+
+.popup-overlay.visible .popup-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--tg-theme-hint-color, var(--tg-secondary-text-color));
+    cursor: pointer;
+    padding: 5px;
+}
+
+.popup-close:hover {
+    color: var(--tg-theme-text-color, var(--tg-text-color));
+}
+
+.popup-content h2 {
+    margin-top: 0;
+    font-size: 22px;
+    color: var(--tg-theme-text-color, var(--tg-text-color));
+}
+
+.popup-content p {
+    color: var(--tg-theme-hint-color, var(--tg-secondary-text-color));
+    margin-bottom: 10px;
+}
+
+.popup-content .category {
+    font-weight: 500;
+    color: var(--tg-main-color);
+    margin-bottom: 15px;
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .button, .filter-button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .floating-chat-button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .popup-content {
+        padding: 20px;
+    }
+
+    .popup-content h2 {
+        font-size: 20px;
+    }
+
+    .offers-list {
+        grid-template-columns: 1fr; /* Одна колонка на маленьких экранах */
+    }
+}
+
+/* Keyframe анимации */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
